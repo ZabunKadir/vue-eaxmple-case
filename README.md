@@ -1,35 +1,54 @@
 # vue-task
 
-This template should help get you started developing with Vue 3 in Vite.
-
-## Recommended IDE Setup
-
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
-
-## Customize configuration
-
-See [Vite Configuration Reference](https://vitejs.dev/config/).
-
-## Project Setup
+## Project Setup and Compile for Development
 
 ```sh
 npm install
-```
-
-### Compile and Hot-Reload for Development
-
-```sh
 npm run dev
 ```
 
-### Compile and Minify for Production
+### Solution to the 6th problem
 
-```sh
-npm run build
-```
+```js
+const data = [
+  { id: "1", name: "user 1" },
+  { id: "2", name: "user 2" },
+  { id: "3", name: "user 3" },
+  { id: "4", name: "user 4" },
+  { id: "5", name: "user 5" },
+  { id: "6", name: "user 6" },
+];
 
-### Lint with [ESLint](https://eslint.org/)
-
-```sh
-npm run lint
+const changeData = (data) => {
+  data.forEach((item, index) => {
+    //delete object id of each one
+    delete item.id;
+    //add name value of object to array
+    for (let [key, value] of Object.entries(item)) {
+      data.push(value);
+    }
+  });
+  for (let i = 0; i < data.length; i++) {
+    //delete empty objects in array
+    data.shift();
+  }
+  return data;
+};
+//call func
+changeData(data);
+//show result
+console.log(data);
+////////////////////////////Solution Two/////////////////////////////////
+const changeData2 = (data) => {
+  //create a temporary array
+  const tempData = [];
+  //add name value of object to array
+  data.forEach((item, index) => {
+    for (let [key, value] of Object.entries(item)) {
+      //control the key for only object name value
+      if (key === "name") tempData.push(value);
+    }
+  });
+  return tempData;
+};
 ```
